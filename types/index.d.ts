@@ -1,16 +1,16 @@
 import Task from '../src/task';
 
 /**
- * the task function
+ * The task function
  */
 export type Fn = () => any | Promise<any>;
 
 /**
- * the benchmark task result object
+ * The benchmark task result object
  */
 export type TaskResult = {
   /*
-   * the last error that was thrown while running the task
+   * The last error that was thrown while running the task
    */
   error?: unknown;
 
@@ -20,66 +20,66 @@ export type TaskResult = {
   totalTime: number;
 
   /**
-   * the minimum value in the samples
+   * The minimum value in the samples
    */
   min: number;
   /**
-   * the maximum value in the samples
+   * The maximum value in the samples
    */
   max: number;
 
   /**
-   * the number of operations per second
+   * The number of operations per second
    */
   hz: number;
 
   /**
-   * how long each operation takes (ms)
+   * How long each operation takes (ms)
    */
   period: number;
 
   /**
-   * task samples of each task iteration time (ms)
+   * Task samples of each task iteration time (ms)
    */
   samples: number[];
 
   /**
-   * samples mean/average (estimate of the population mean)
+   * Samples mean/average (estimate of the population mean)
    */
   mean: number;
 
   /**
-   * samples variance (estimate of the population variance)
+   * Samples variance (estimate of the population variance)
    */
   variance: number;
 
   /**
-   * samples standard deviation (estimate of the population standard deviation)
+   * Samples standard deviation (estimate of the population standard deviation)
    */
   sd: number;
 
   /**
-   * standard error of the mean (a.k.a. the standard deviation of the sampling distribution of the sample mean)
+   * Standard error of the mean (a.k.a. the standard deviation of the sampling distribution of the sample mean)
    */
   sem: number;
 
   /**
-   * degrees of freedom
+   * Degrees of freedom
    */
   df: number;
 
   /**
-   * critical value of the samples
+   * Critical value of the samples
    */
   critical: number;
 
   /**
-   * margin of error
+   * Margin of error
    */
   moe: number;
 
   /**
-   * relative margin of error
+   * Relative margin of error
    */
   rme: number;
 
@@ -106,8 +106,8 @@ export type TaskResult = {
 
 /**
   * Both the `Task` and `Bench` objects extend the `EventTarget` object,
-  * so you can attach a listeners to different types of events
-  * to each class instance using the universal `addEventListener` and
+  * So you can attach a listeners to different types of events
+  * To each class instance using the universal `addEventListener` and
  * `removeEventListener`
  */
 
@@ -130,6 +130,10 @@ export type Hook = (task: Task, mode: 'warmup' | 'run') => void | Promise<void>;
 type NoopEventListener = () => any | Promise<any>
 type TaskEventListener = (e: Event & { task: Task }) => any | Promise<any>
 
+/**
+ * All the events that can be listened to from a `Bench`
+ * @example `bench.addEventListener('complete', (e) => {...});`
+ */
 export interface BenchEventsMap{
   abort: NoopEventListener
   start: NoopEventListener
@@ -143,7 +147,7 @@ export interface BenchEventsMap{
 }
 
 /**
- * task events
+ * Task events
  */
 export type TaskEvents =
   | 'abort'
@@ -154,6 +158,10 @@ export type TaskEvents =
   | 'warmup'
   | 'cycle';
 
+/**
+ * All the events that can be listened to from a task.
+ * @example `task.addEventListener('complete', (e) => {...});`
+ */
 export type TaskEventsMap = {
   abort: NoopEventListener
   start: TaskEventListener
@@ -163,19 +171,20 @@ export type TaskEventsMap = {
   warmup: TaskEventListener
   reset: TaskEventListener
 }
+
 export type Options = {
   /**
-   * time needed for running a benchmark task (milliseconds) @default 500
+   * Time needed for running a benchmark task (milliseconds) @default 500
    */
   time?: number;
 
   /**
-   * number of times that a task should run if even the time option is finished @default 10
+   * Number of times that a task should run if even the time option is finished @default 10
    */
   iterations?: number;
 
   /**
-   * function to get the current timestamp in milliseconds
+   * Function to get the current timestamp in milliseconds
    */
   now?: () => number;
 
@@ -185,22 +194,22 @@ export type Options = {
   signal?: AbortSignal;
 
   /**
-   * warmup time (milliseconds) @default 100ms
+   * Warmup time (milliseconds) @default 100ms
    */
   warmupTime?: number;
 
   /**
-   * warmup iterations @default 5
+   * Warmup iterations @default 5
    */
   warmupIterations?: number;
 
   /**
-   * setup function to run before each benchmark task (cycle)
+   * Setup function to run before each benchmark task (cycle)
    */
   setup?: Hook;
 
   /**
-   * teardown function to run after each benchmark task (cycle)
+   * Teardown function to run after each benchmark task (cycle)
    */
   teardown?: Hook;
 };

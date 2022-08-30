@@ -8,27 +8,27 @@ import { getMean, getVariance } from './utils';
 
 /**
  * A class that represents each benchmark task in Tinybench. It keeps track of the
- * results, name, Bench instance, the task function and the number times the task
- * function has been executed.
+ * Results, name, Bench instance, the task function and the number times the task
+ * Function has been executed.
  */
 export default class Task extends EventTarget {
   bench: Bench;
 
   /**
-   * task name
+   * Task name
    */
   name: string;
 
   fn: Fn;
 
   /*
-   * the number of times the task
-   * function has been executed
+   * The number of times the task
+   * Function has been executed
    */
   runs = 0;
 
   /**
-   * the result object
+   * The result object
    */
   result?: TaskResult;
 
@@ -41,7 +41,7 @@ export default class Task extends EventTarget {
   }
 
   /**
-   * run the current task and write the results in `Task.result` object
+   * Run the current task and write the results in `Task.result` object
    */
   async run() {
     this.dispatchEvent(createBenchEvent('start', this));
@@ -137,7 +137,7 @@ export default class Task extends EventTarget {
   }
 
   /**
-   * warmup the current task
+   * Warmup the current task
    */
   async warmup() {
     this.dispatchEvent(createBenchEvent('warmup', this));
@@ -182,7 +182,7 @@ export default class Task extends EventTarget {
   }
 
   /**
-   * change the result object values
+   * Change the result object values
    */
   setResult(result: Partial<TaskResult>) {
     this.result = { ...this.result, ...result } as TaskResult;
@@ -190,8 +190,8 @@ export default class Task extends EventTarget {
   }
 
   /**
-   * reset the task to make the `Task.runs` a zero-value and remove the `Task.result`
-   * object
+   * Reset the task to make the `Task.runs` a zero-value and remove the `Task.result`
+   * Object
    */
   reset() {
     this.dispatchEvent(createBenchEvent('reset', this));

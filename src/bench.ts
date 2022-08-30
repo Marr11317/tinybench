@@ -6,7 +6,7 @@ import Task from './task';
 import { now } from './utils';
 /**
  * The Benchmark instance for keeping track of the benchmark tasks and controlling
- * them.
+ * Them.
  */
 export default class Bench extends EventTarget {
   #tasks: Map<string, Task> = new Map();
@@ -52,7 +52,7 @@ export default class Bench extends EventTarget {
   }
 
   /**
-   * run the added tasks that were registered using the
+   * Run the added tasks that were registered using the
    * `add` method
    */
   async run() {
@@ -70,7 +70,7 @@ export default class Bench extends EventTarget {
   }
 
   /**
-   * warmup the benchmark tasks
+   * Warmup the benchmark tasks
    */
   async warmup() {
     this.dispatchEvent(createBenchEvent('warmup'));
@@ -80,7 +80,7 @@ export default class Bench extends EventTarget {
   }
 
   /**
-   * reset each task and remove its result
+   * Reset each task and remove its result
    */
   reset() {
     this.dispatchEvent(createBenchEvent('reset'));
@@ -90,7 +90,7 @@ export default class Bench extends EventTarget {
   }
 
   /**
-   * add a benchmark task to the task map
+   * Add a benchmark task to the task map
    */
   add(name: string, fn: Fn) {
     const task = new Task(this, name, fn);
@@ -100,7 +100,7 @@ export default class Bench extends EventTarget {
   }
 
   /**
-   * remove a benchmark task from the task map
+   * Remove a benchmark task from the task map
    */
   remove(name: string) {
     const task = this.getTask(name);
@@ -140,7 +140,7 @@ export default class Bench extends EventTarget {
   }
 
   /**
-   * get a task based on the task name
+   * Get a task based on the task name
    */
   getTask(name: string): Task | undefined {
     return this.#tasks.get(name);
